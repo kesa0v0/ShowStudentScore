@@ -1,7 +1,6 @@
 import xlrd as excel
 import pprint
 
-
 choice_position = 4
 answer_position = 5
 total_etc1_position = 8
@@ -11,7 +10,7 @@ name_position = 2
 
 class ExcelDataStructure:
     # TODO: Delete preload data
-    def __init__(self, file=excel.open_workbook("D:\program\kesa_project\python\SearchStudent\sample\지필평가 일람표 양식.xls").sheet_by_index(0)):
+    def __init__(self, file):
         # 학생들
         self.student = {}
 
@@ -31,18 +30,18 @@ class ExcelDataStructure:
             end += 1
 
         # 총점 찾기
-        self.total_choice_score = float(file.cell_value(start+2, choice_position)[1:-1])
-        self.total_answer_score = float(file.cell_value(start+2, answer_position)[1:-1])
-        self.total_etc1_score = float(file.cell_value(start+2, total_etc1_position)[1:-1])
-        self.total_etc2_score = float(file.cell_value(start+2, total_etc2_position)[1:-1])
+        self.total_choice_score = float(file.cell_value(start + 2, choice_position)[1:-1])
+        self.total_answer_score = float(file.cell_value(start + 2, answer_position)[1:-1])
+        self.total_etc1_score = float(file.cell_value(start + 2, total_etc1_position)[1:-1])
+        self.total_etc2_score = float(file.cell_value(start + 2, total_etc2_position)[1:-1])
 
         print("선택형:", self.total_choice_score)
         print("서술형:", self.total_answer_score)
         print("기타1:", self.total_etc1_score)
         print("기타2:", self.total_etc2_score)
 
-        for number in range(start+3, end):
-            self.student[int(file.cell_value(number, 1).split("/")[1])] = ( # 번호
+        for number in range(start + 3, end):
+            self.student[file.cell_value(number, 1).split("/")[1]] = (  # 번호
                 file.cell_value(number, name_position),
                 file.cell_value(number, choice_position),
                 file.cell_value(number, answer_position),

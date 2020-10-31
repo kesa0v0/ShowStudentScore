@@ -6,6 +6,7 @@ import xlrd as excel
 
 import ui.ui_search_student
 from data import ExcelDataStructure
+import tool
 
 
 class LoadFile:
@@ -16,9 +17,9 @@ class LoadFile:
         try:
             data = ExcelDataStructure(excel.open_workbook(self.link.get()).sheet_by_index(0))
             self.serach_studnet_window = ui.ui_search_student.SearchStudent(data)
+
         except Exception as e:
             tkinter.messagebox.showerror("메세지 상자", e)
-            raise e
 
     def find_pressed(self):
         print("find")
@@ -31,8 +32,8 @@ class LoadFile:
         self.root = tkinter.Tk()
 
         self.root.title("파일 불러오기")
-        # self.root.geometry("500x100")
         self.root.resizable(0, 0)
+        tool.center(self.root)
 
         # ui 구성품
         label_filename = tkinter.Label(self.root, text="파일: ")

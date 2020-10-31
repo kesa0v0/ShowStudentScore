@@ -1,15 +1,22 @@
 import tkinter
+import tkinter.messagebox
 
 import ui.ui_show_student
+import tool
 
 
-class SearchStudent:
+class SearchStudent(tkinter.Toplevel):
     def confirm_downed(self):
         number = self.text_number.get()
         print("confirm!")
         print("Number:", number)
-
-        ui.ui_show_student.ShowStudent(number + self.file[number])
+        try:
+            ui.ui_show_student.ShowStudent(number, self.file.student[number])
+        except KeyError as e:
+            tkinter.messagebox.showerror("메세지 상자", "없는 번호입니다: "+e.args[0])
+        except Exception as e:
+            tkinter.messagebox.showerror("메세지 상자", e)
+            raise e
 
     def __init__(self, file):
         # 엑셀 파일 열기
@@ -19,8 +26,8 @@ class SearchStudent:
         self.root = tkinter.Tk()
 
         self.root.title("학생 선택")
-        # root.geometry("500x100")
         self.root.resizable(0, 0)
+        tool.center(self.root, (50, 50))
 
         # ui 구성품
         self.label_filename = tkinter.Label(self.root, text="번호: ")
