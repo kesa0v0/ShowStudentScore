@@ -4,7 +4,7 @@ import tkinter.messagebox
 
 import xlrd as excel
 
-# import ui.ui_search_student
+import ui.ui_search_student
 from data import ExcelDataStructure
 
 
@@ -15,7 +15,7 @@ class LoadFile:
         print("confirm!")
         try:
             data = ExcelDataStructure(excel.open_workbook(self.link.get()).sheet_by_index(0))
-            # self.serach_studnet_window = ui.ui_search_student.SearchStudent(data)
+            self.serach_studnet_window = ui.ui_search_student.SearchStudent(data)
         except Exception as e:
             tkinter.messagebox.showerror("메세지 상자", e)
             raise e

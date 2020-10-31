@@ -5,10 +5,11 @@ import ui.ui_show_student
 
 class SearchStudent:
     def confirm_downed(self):
+        number = self.text_number.get()
         print("confirm!")
-        print("Number:", self.text_number.get())
+        print("Number:", number)
 
-        ui.ui_show_student.ShowStudent()
+        ui.ui_show_student.ShowStudent(number + self.file[number])
 
     def __init__(self, file):
         # 엑셀 파일 열기
@@ -17,7 +18,7 @@ class SearchStudent:
         # 대충 창 설정 하는 내용
         self.root = tkinter.Tk()
 
-        self.root.title("파일 불러오기")
+        self.root.title("학생 선택")
         # root.geometry("500x100")
         self.root.resizable(0, 0)
 
